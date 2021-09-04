@@ -26,7 +26,7 @@ const routerConfig: IRouterConfig[] = [
       },
       {
         // 微应用独立运行 404 路由渲染 NotFound 组件
-        component: isInIcestark() ? () => renderNotFound() : NotFound,
+        component: (isInIcestark() ? () => renderNotFound() : NotFound) as any,
       },
     ],
   },
