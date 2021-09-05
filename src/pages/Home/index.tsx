@@ -7,9 +7,9 @@ import PageTitle from '@/components/PageTitle';
 
 export default function Home() {
   useEffect(() => {
-    console.log('Home Page mounted');
+    // console.log('Home Page mounted');
     return () => {
-      console.log('Home Page unmounted');
+      // console.log('Home Page unmounted');
     };
   }, []);
 
@@ -23,7 +23,8 @@ export default function Home() {
         onClick={() => {
           appHistory.push('/');
         }}
-      >子应用间跳转 1
+      >
+        子应用间跳转 1
       </Button>
       <br />
       <br />
@@ -32,7 +33,8 @@ export default function Home() {
         onClick={() => {
           appHistory.push('/waiter');
         }}
-      >子应用间跳转 2
+      >
+        子应用间跳转 2
       </Button>
     </IceContainer>
   );

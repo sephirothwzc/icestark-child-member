@@ -5,35 +5,59 @@
   "dependencies": {
     "@alifd/next": "^1.x",
     "@alifd/theme-design-pro": "^0.x",
+    "@apollo/client": "^3.4.10",
     "@icedesign/container": "^1.0.4",
+    "graphql": "^15.5.2",
+    "lodash": "^4.17.21",
     "moment": "^2.24.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router": "^5.2.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-angular": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
     "@iceworks/spec": "^1.0.0",
+    "@types/lodash": "^4.14.172",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.2",
     "build-plugin-fusion": "^0.1.0",
     "build-plugin-icestark": "^2.0.0",
     "build-plugin-moment-locales": "^0.1.0",
+    "conventional-changelog-cli": "^2.1.1",
     "eslint": "^7.30.0",
+    "husky": "^7.0.2",
     "ice.js": "^1.0.0",
     "stylelint": "^13.7.2"
   },
   "scripts": {
-    "start": "icejs start",
-    "build": "icejs build",
+    "start": "icejs start  --port 3334 --mode local",
+    "build": "icejs build --mode prod",
     "lint": "npm run eslint && npm run stylelint",
     "eslint": "eslint --cache --ext .js,.jsx,.ts,.tsx ./",
     "eslint:fix": "npm run eslint -- --fix",
-    "stylelint": "stylelint \"**/*.{css,scss,less}\""
+    "stylelint": "stylelint \"**/*.{css,scss,less}\"",
+    "commit": "git add . && git-cz && git push",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/ice-lab/react-materials/tree/master/scaffolds/icestark-child"
   },
   "private": true,
-  "originTemplate": "@icedesign/stark-child-scaffold"
+  "originTemplate": "@icedesign/stark-child-scaffold",
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged",
+      "pre-add": "lint-staged",
+      "pre-push": "lint-staged"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  }
 }
