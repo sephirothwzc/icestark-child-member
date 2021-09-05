@@ -2,10 +2,11 @@ import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 import { get, startsWith } from 'lodash';
 import { ApolloClient, InMemoryCache, createHttpLink, from } from '@apollo/client';
-import { config } from 'ice';
+import { config, useAuth } from 'ice';
 
 // POST请求
 export const useApolloClient = () => {
+  const [auth] = useAuth();
   // const appUser = useSelector((state: RootState) => state?.login?.appUser);
 
   const errorLogLink = onError(({ graphQLErrors, networkError }) => {
@@ -50,13 +51,11 @@ export const useApolloClient = () => {
   });
 
   const authLink = setContext((_, { headers }) => {
-    // return the headers to the context so httpLink can read them
-    // const token = store.getState()?.login?.appUser?.token;
     return {
       headers: {
         ...headers,
-        // token,
-        'app-name': process.env.REACT_APP_APP_NAME,
+        token: auth.token,
+        'app-name': config.appName,
       },
     };
   });

@@ -5,29 +5,18 @@ import Detail from '@/pages/Detail';
 import Home from '@/pages/Home';
 import List from '@/pages/List';
 import NotFound from '@/components/NotFound';
+import MemberList from '@/pages/MemberList';
 
 const routerConfig: IRouterConfig[] = [
   {
     path: '/',
     component: BasicLayout,
     children: [
-      {
-        path: '/',
-        exact: true,
-        component: Home,
-      },
-      {
-        path: '/list',
-        component: List,
-      },
-      {
-        path: '/detail',
-        component: Detail,
-      },
-      {
-        // 微应用独立运行 404 路由渲染 NotFound 组件
-        component: (isInIcestark() ? () => renderNotFound() : NotFound) as any,
-      },
+      { path: '/list', component: List },
+      { path: '/detail', component: Detail },
+      { path: '/', exact: true, component: Home },
+      { path: '/member-list', component: MemberList },
+      {},
     ],
   },
 ];
